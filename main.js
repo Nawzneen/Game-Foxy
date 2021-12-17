@@ -95,8 +95,8 @@ class Test {
 
     this.x = x;
     this.y = y;
-    this.foxWidth = 1041.6;
-    this.foxHeight = 1041.6;
+    this.foxWidth = 200;
+    this.foxHeight = 200;
     this.height = 160;
     this.width = 160;
     this.radius = this.width / 2;
@@ -299,8 +299,8 @@ class Enemy {
 
     // this.color = color;
     this.velocity = velocity;
-    this.enemyWidth = 1041.6;
-    this.enemyHeight = 1041.6;
+    this.enemyWidth = 200;
+    this.enemyHeight = 200;
     this.height = 100;
     this.width = 100;
     this.radius = this.width / 2;
@@ -355,8 +355,8 @@ class Bonus {
     this.x = x;
     this.y = y;
     this.velocity = velocity;
-    this.bonusWidth = 1041.6;
-    this.bonusHeight = 1041.6;
+    this.bonusWidth = 200;
+    this.bonusHeight = 200;
     this.height = 80;
     this.width = 80;
     this.radius = this.width / 2;
