@@ -498,208 +498,210 @@ let animationSpeed = 0;
 const staggerFrames = 8;
 
 let animationID;
-function animate() {
-  animationID = requestAnimationFrame(animate);
-  animationFrame++;
+window.addEventListener("DOMContentLoaded", (event) => {
+  function animate() {
+    animationID = requestAnimationFrame(animate);
+    animationFrame++;
 
-  if (animationFrame % 1800 == 0) {
-    gameSpeed++;
-    showGameSpeed.innerHTML = gameSpeed;
-  }
-  // console.log(ctx);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  gameFrame++;
-  layersArrey.forEach((item) => {
-    item.draw();
-    item.update();
-  });
-
-  let position = Math.floor(animationSpeed / staggerFrames) % 8;
-  frameX = foxWidth * position;
-  // ctx.drawImage(playerAnimationImage, 0, 0);
-  // ctx.drawImage(
-  //   playerAnimationImage,
-  //   frameX,
-  //   frameY * foxHeight,
-  //   foxWidth,
-  //   foxHeight,
-  //   0,
-  //   canvas.height - 250,
-  //   200,
-  //   200
-  // );
-  if (animationSpeed % staggerFrames == 0) {
-    if (frameX < 7) frameX += 1;
-    else frameX = 0;
-  }
-  animationSpeed++;
-  test.update();
-  test.draw();
-
-  // to draw the particles when explodes
-  particles.forEach((particle, index) => {
-    if (particle.alpha <= 0) {
-      particles.splice(index, 1);
-    } else {
-      particle.update();
+    if (animationFrame % 1800 == 0) {
+      gameSpeed++;
+      showGameSpeed.innerHTML = gameSpeed;
     }
-  });
-  // player.draw();
-  enemies.forEach((enemy, index) => {
-    enemy.draw();
-    enemy.update();
+    // console.log(ctx);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    gameFrame++;
+    layersArrey.forEach((item) => {
+      item.draw();
+      item.update();
+    });
 
-    // why do we write settimeout with 0 on start??????//** */
-    // remove the enemy from array, when leaving the screen
-
-    if (enemy.x + enemy.radius < 0) {
-      enemies.splice(index, 1);
+    let position = Math.floor(animationSpeed / staggerFrames) % 8;
+    frameX = foxWidth * position;
+    // ctx.drawImage(playerAnimationImage, 0, 0);
+    // ctx.drawImage(
+    //   playerAnimationImage,
+    //   frameX,
+    //   frameY * foxHeight,
+    //   foxWidth,
+    //   foxHeight,
+    //   0,
+    //   canvas.height - 250,
+    //   200,
+    //   200
+    // );
+    if (animationSpeed % staggerFrames == 0) {
+      if (frameX < 7) frameX += 1;
+      else frameX = 0;
     }
+    animationSpeed++;
+    test.update();
+    test.draw();
 
-    // Defeat (Enemy and Test hits) END GAME
-    const dist1 = Math.hypot(
-      test.x + test.radius - enemy.x - enemy.radius,
-      test.y + test.radius - enemy.y - enemy.radius
-    );
+    // to draw the particles when explodes
+    particles.forEach((particle, index) => {
+      if (particle.alpha <= 0) {
+        particles.splice(index, 1);
+      } else {
+        particle.update();
+      }
+    });
+    // player.draw();
+    enemies.forEach((enemy, index) => {
+      enemy.draw();
+      enemy.update();
 
-    if (dist1 - enemy.radius - test.radius + 35 < 0) {
-      enemies.splice(index, 1);
-      for (let i = 0; i < 60 * 2; i++) {
-        particles.push(
-          new Particle(
-            test.x + test.width,
-            test.y + test.height / 2,
-            Math.random() * 10,
-            "orange",
-            {
-              x: (Math.random() - 0.5) * 10,
-              y: (Math.random() - 0.5) * 10,
-            }
-          )
-        );
+      // why do we write settimeout with 0 on start??????//** */
+      // remove the enemy from array, when leaving the screen
+
+      if (enemy.x + enemy.radius < 0) {
+        enemies.splice(index, 1);
       }
 
-      if (heart > 0) {
-        if (heart === 3) {
-          for (let i = 0; i < 60 * 2; i++) {
-            particles.push(
-              new Particle(
-                heartThree.x + heartThree.width,
-                heartThree.y + heartThree.height / 2,
-                Math.random() * 3,
-                "red",
-                {
-                  x: (Math.random() - 0.5) * 5,
-                  y: (Math.random() - 0.5) * 5,
-                }
-              )
-            );
-          }
+      // Defeat (Enemy and Test hits) END GAME
+      const dist1 = Math.hypot(
+        test.x + test.radius - enemy.x - enemy.radius,
+        test.y + test.radius - enemy.y - enemy.radius
+      );
 
-          heartThree.remove();
-          heart--;
-        } else if (heart === 2) {
-          for (let i = 0; i < 60 * 2; i++) {
-            particles.push(
-              new Particle(
-                heartTwo.x + heartTwo.width,
-                heartTwo.y + heartTwo.height / 2,
-                Math.random() * 2,
-                "red",
-                {
-                  x: (Math.random() - 0.5) * 3,
-                  y: (Math.random() - 0.5) * 3,
-                }
-              )
-            );
-          }
-
-          heartTwo.remove();
-          heart--;
-        } else if (heart === 1) {
-          for (let i = 0; i < 60 * 2; i++) {
-            particles.push(
-              new Particle(
-                heartOne.x + heartOne.width,
-                heartOne.y + heartOne.height / 2,
-                Math.random() * 2,
-                "red",
-                {
-                  x: (Math.random() - 0.5) * 3,
-                  y: (Math.random() - 0.5) * 3,
-                }
-              )
-            );
-          }
-          heartOne.remove();
-          heart--;
+      if (dist1 - enemy.radius - test.radius + 35 < 0) {
+        enemies.splice(index, 1);
+        for (let i = 0; i < 60 * 2; i++) {
+          particles.push(
+            new Particle(
+              test.x + test.width,
+              test.y + test.height / 2,
+              Math.random() * 10,
+              "orange",
+              {
+                x: (Math.random() - 0.5) * 10,
+                y: (Math.random() - 0.5) * 10,
+              }
+            )
+          );
         }
-      } else if (heart === 0) {
-        cancelAnimationFrame(animationID);
-        // alert("you have lost");
-        gameOver = true;
-        popUp.style.display = "flex";
-        lastResult.innerHTML = points.innerHTML;
-        clearInterval(refreshIntervalId);
-        health = 2;
-      }
-    }
 
-    // Defeat (Enemy and Player hits)
-    // const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
-    // if (dist - player.radius - enemy.radius < 0) {
-    //   // player.update();
-    //   cancelAnimationFrame(animationID);
-    //   popUp.style.display = "flex";
-
-    //   // alert("you have lost");
-    // }
-  });
-
-  bonuses.forEach((bonus, index) => {
-    bonus.draw();
-    bonus.update();
-
-    const dist = Math.hypot(test.x - bonus.x, test.y - bonus.y);
-    // const dist2 = Math.hypot(player.x - bonus.x, player.y - bonus.y);
-
-    // bonuses leaving the canvas
-    if (bonus.x + bonus.radius + 200 < 0) {
-      bonuses.splice(index, 1);
-    }
-    // Bonus and test hit
-
-    if (dist - test.radius - bonus.radius < 0) {
-      bonuses.splice(index, 1);
-      bonusPoints += 20;
-      for (let i = 0; i < 100 * 2; i++) {
-        particles.push(
-          new Particle(
-            test.x + bonus.width,
-            test.y + bonus.height / 2,
-            Math.random() * 2,
-            "white",
-            {
-              x: (Math.random() - 0.5) * 50,
-              y: (Math.random() - 0.5) * 50,
+        if (heart > 0) {
+          if (heart === 3) {
+            for (let i = 0; i < 60 * 2; i++) {
+              particles.push(
+                new Particle(
+                  heartThree.x + heartThree.width,
+                  heartThree.y + heartThree.height / 2,
+                  Math.random() * 3,
+                  "red",
+                  {
+                    x: (Math.random() - 0.5) * 5,
+                    y: (Math.random() - 0.5) * 5,
+                  }
+                )
+              );
             }
-          )
-        );
+
+            heartThree.remove();
+            heart--;
+          } else if (heart === 2) {
+            for (let i = 0; i < 60 * 2; i++) {
+              particles.push(
+                new Particle(
+                  heartTwo.x + heartTwo.width,
+                  heartTwo.y + heartTwo.height / 2,
+                  Math.random() * 2,
+                  "red",
+                  {
+                    x: (Math.random() - 0.5) * 3,
+                    y: (Math.random() - 0.5) * 3,
+                  }
+                )
+              );
+            }
+
+            heartTwo.remove();
+            heart--;
+          } else if (heart === 1) {
+            for (let i = 0; i < 60 * 2; i++) {
+              particles.push(
+                new Particle(
+                  heartOne.x + heartOne.width,
+                  heartOne.y + heartOne.height / 2,
+                  Math.random() * 2,
+                  "red",
+                  {
+                    x: (Math.random() - 0.5) * 3,
+                    y: (Math.random() - 0.5) * 3,
+                  }
+                )
+              );
+            }
+            heartOne.remove();
+            heart--;
+          }
+        } else if (heart === 0) {
+          cancelAnimationFrame(animationID);
+          // alert("you have lost");
+          gameOver = true;
+          popUp.style.display = "flex";
+          lastResult.innerHTML = points.innerHTML;
+          clearInterval(refreshIntervalId);
+          health = 2;
+        }
       }
-    }
-    // bonuses leaving the canvas
-    // if (dist2 - player.radius - bonus.radius < 0) {
-    //   bonuses.splice(index, 1);
-    //   bonusPoints += 200;
-    //   // points.innerHTML += bonusPoints;
-    //   // add sound
-    //   // add to the points
-    // }
-  });
-}
-enemyLoop();
-BonusesLoop();
-animate();
+
+      // Defeat (Enemy and Player hits)
+      // const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+      // if (dist - player.radius - enemy.radius < 0) {
+      //   // player.update();
+      //   cancelAnimationFrame(animationID);
+      //   popUp.style.display = "flex";
+
+      //   // alert("you have lost");
+      // }
+    });
+
+    bonuses.forEach((bonus, index) => {
+      bonus.draw();
+      bonus.update();
+
+      const dist = Math.hypot(test.x - bonus.x, test.y - bonus.y);
+      // const dist2 = Math.hypot(player.x - bonus.x, player.y - bonus.y);
+
+      // bonuses leaving the canvas
+      if (bonus.x + bonus.radius + 200 < 0) {
+        bonuses.splice(index, 1);
+      }
+      // Bonus and test hit
+
+      if (dist - test.radius - bonus.radius < 0) {
+        bonuses.splice(index, 1);
+        bonusPoints += 20;
+        for (let i = 0; i < 100 * 2; i++) {
+          particles.push(
+            new Particle(
+              test.x + bonus.width,
+              test.y + bonus.height / 2,
+              Math.random() * 2,
+              "white",
+              {
+                x: (Math.random() - 0.5) * 50,
+                y: (Math.random() - 0.5) * 50,
+              }
+            )
+          );
+        }
+      }
+      // bonuses leaving the canvas
+      // if (dist2 - player.radius - bonus.radius < 0) {
+      //   bonuses.splice(index, 1);
+      //   bonusPoints += 200;
+      //   // points.innerHTML += bonusPoints;
+      //   // add sound
+      //   // add to the points
+      // }
+    });
+  }
+  enemyLoop();
+  BonusesLoop();
+  animate();
+});
 
 // Call Jump Animation
 addEventListener("keyup", (event) => {
