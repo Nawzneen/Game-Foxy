@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="points-container">Points: <span id="points">10</span></div>
+    <div id="speed-container">
+      <p>Game Speed: <span id="showGameSpeed"></span></p>
+      <input
+        type="range"
+        min="1"
+        max="20"
+        value="5"
+        class="slider"
+        id="slider"
+      />
+    </div>
+    <div id="heart-img">
+      <img
+        id="heartOne"
+        src="./character images/heart.png"
+        width="40px"
+        height="40px"
+        alt=""
+      />
+      <img
+        id="heartTwo"
+        src="./character images/heart.png"
+        width="40px"
+        height="40px"
+        alt=""
+      />
+      <img
+        id="heartThree"
+        src="./character images/heart.png"
+        width="40px"
+        height="40px"
+        alt=""
+      />
+    </div>
+    <div class="contain-canvas">
+      <canvas> </canvas>
+    </div>
+    <!-- <img src="./character images/animation.png" alt="" /> -->
+    <div class="div-center">
+      <div class="popupmenu">
+        <div class="center">
+          <p>Game Over</p>
+          <p>Result:</p>
+          <span id="last-result">0</span>
+
+          <button id="restart-button">Restart</button>
+        </div>
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
