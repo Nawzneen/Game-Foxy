@@ -1,6 +1,6 @@
 const canvas = document.querySelector("canvas");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = 1000;
+canvas.height = 600;
 const ctx = canvas.getContext("2d");
 let points = document.querySelector("#points");
 const popUp = document.querySelector(".div-center");
@@ -54,8 +54,8 @@ class Layer {
   constructor(image, speedModifier) {
     this.x = 0;
     this.y = 0;
-    this.width = 2400;
-    this.height = 720;
+    this.width = 2000;
+    this.height = 600;
     this.x2 = this.width;
     this.image = image;
     this.speedModifier = speedModifier;
@@ -435,8 +435,9 @@ class Particle {
 }
 
 const x = canvas.width / 4;
-const y = canvas.height - 130;
-let test = new Test(0, 440);
+const y = canvas.height - 240;
+
+let test = new Test(0, y);
 // Create Player
 const enemyRadius = 10;
 // Create array of Enemies
@@ -449,7 +450,7 @@ function createEnemies() {
   let velocity = gameSpeed;
   console.log(gameSpeed);
   // let randomRadius = Math.random() * 30;
-  enemies.push(new Enemy(canvas.width - 10, 480, velocity));
+  enemies.push(new Enemy(canvas.width - 10, y + 40, velocity));
 }
 
 function enemyLoop() {
