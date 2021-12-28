@@ -37,7 +37,7 @@ let x2 = 2400;
 // playerImage.src = "./character images/STAND STILL.png";
 
 var jumpSound = new Audio(
-  "./sound/mixkit-player-jumping-in-a-video-game-2043.wav"
+  "./sound/mixit-jump.flac"
 );
 
 const slider = document.getElementById("slider");
