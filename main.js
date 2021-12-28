@@ -301,8 +301,8 @@ class Enemy {
     this.velocity = velocity;
     this.enemyWidth = 200;
     this.enemyHeight = 200;
-    this.height = 100;
-    this.width = 100;
+    this.height = 130;
+    this.width = 130;
     this.radius = this.width / 2;
     this.frameX = 0;
     this.frameY = 0;
@@ -450,7 +450,7 @@ function createEnemies() {
   let velocity = gameSpeed;
   console.log(gameSpeed);
   // let randomRadius = Math.random() * 30;
-  enemies.push(new Enemy(canvas.width - 10, y + 40, velocity));
+  enemies.push(new Enemy(canvas.width - 10, y + 10, velocity));
 }
 
 function enemyLoop() {
