@@ -323,7 +323,7 @@ class Enemy {
     ctx.drawImage(
       this.image,
       this.frame * this.enemyWidth,
-      4 * this.enemyHeight,
+      3 * this.enemyHeight,
       this.enemyWidth,
       this.enemyHeight,
       this.x,
