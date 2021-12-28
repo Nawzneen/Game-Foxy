@@ -6,10 +6,10 @@ let points = document.querySelector("#points");
 const popUp = document.querySelector(".div-center");
 const restartBtn = document.querySelector("#restart-button");
 const lastResult = document.querySelector("#last-result");
-const heartImg = document.querySelector("#heart-img");
-const heartThree = document.getElementById("heartThree");
-const heartTwo = document.getElementById("heartTwo");
-const heartOne = document.getElementById("heartOne");
+// const heartImg = document.querySelector("#heart-img");
+// const heartThree = document.getElementById("heartThree");
+// const heartTwo = document.getElementById("heartTwo");
+// const heartOne = document.getElementById("heartOne");
 
 let bonusPoints = 0;
 let initialPoint = 0;
@@ -33,12 +33,20 @@ backgroundImage5.src = "./backgroundLayers/layer-5.png";
 let imageX = 0;
 let x2 = 2400;
 
+// new code
+const Heart1 = new Image();
+Heart1.src = "./character images/heart.png";
+const Heart2 = new Image();
+Heart2.src = "./character images/heart.png";
+const Heart3 = new Image();
+Heart3.src = "./character images/heart.png";
+// end of new code
+
 // const playerImage = new Image();
 // playerImage.src = "./character images/STAND STILL.png";
 
-var jumpSound = new Audio(
-  "./sound/mixit-jump.flac"
-);
+var jumpSound = new Audio("./sound/mixit-jump.flac");
+var hitSound = new Audio("./sound/hitEnemy.flac");
 
 const slider = document.getElementById("slider");
 slider.value = gameSpeed;
@@ -87,6 +95,29 @@ const layer5 = new Layer(backgroundImage5, 1);
 
 const layersArrey = [layer1, layer2, layer3, layer4, layer5];
 
+// new code
+class Heart {
+  constructor(image, x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 40;
+    this.height = 40;
+
+    this.image = image;
+  }
+  draw() {
+    ctx.drawImage(this.image, this.x, this.y, 40, 40);
+  }
+}
+// new code
+const heart1 = new Heart(Heart1, 0, 0);
+const heart2 = new Heart(Heart2, 40, 0);
+const heart3 = new Heart(Heart3, 80, 0);
+
+const HeartsArray = [heart1, heart2, heart3];
+
+// end of new code
+// end of new code
 // DIFFERENT CLASSES
 class Test {
   constructor(x, y) {
@@ -457,6 +488,9 @@ function enemyLoop() {
   var t = 3000 + Math.random() * 10000;
   if (animationFrame % 1800 == 0) {
     t = t - 1000;
+    console.log("time is faster ");
+
+    console.log(t);
   }
   // console.log(t);
   setTimeout(function () {
@@ -498,11 +532,19 @@ let animationSpeed = 0;
 const staggerFrames = 8;
 
 let animationID;
+
+// new code
+function drawHeart() {
+  ctx.drawImage(Heart1, 0, 0, 40, 40);
+  ctx.drawImage(Heart2, 40, 0, 40, 40);
+  ctx.drawImage(Heart3, 80, 0, 40, 40);
+}
+// end of new code
 window.addEventListener("DOMContentLoaded", (event) => {
   function animate() {
     animationID = requestAnimationFrame(animate);
     animationFrame++;
-
+    drawHeart();
     if (animationFrame % 1800 == 0) {
       gameSpeed++;
       showGameSpeed.innerHTML = gameSpeed;
@@ -510,9 +552,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // console.log(ctx);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     gameFrame++;
+    // new code
+
+    // end of new cocde
+
     layersArrey.forEach((item) => {
       item.draw();
       item.update();
+    });
+    HeartsArray.forEach((item) => {
+      item.draw();
+      // item.update();
     });
 
     let position = Math.floor(animationSpeed / staggerFrames) % 8;
@@ -566,6 +616,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       if (dist1 - enemy.radius - test.radius + 35 < 0) {
         enemies.splice(index, 1);
         for (let i = 0; i < 60 * 2; i++) {
+          hitSound.play();
           particles.push(
             new Particle(
               test.x + test.width,
@@ -585,54 +636,57 @@ window.addEventListener("DOMContentLoaded", (event) => {
             for (let i = 0; i < 60 * 2; i++) {
               particles.push(
                 new Particle(
-                  heartThree.x + heartThree.width,
-                  heartThree.y + heartThree.height / 2,
+                  heart3.x + heart3.width / 2,
+                  heart3.y + heart3.height / 2,
                   Math.random() * 3,
                   "red",
                   {
-                    x: (Math.random() - 0.5) * 5,
-                    y: (Math.random() - 0.5) * 5,
+                    x: (Math.random() - 0.5) * 7,
+                    y: (Math.random() - 0.5) * 7,
                   }
                 )
               );
             }
-
-            heartThree.remove();
+            HeartsArray.splice(2, 1);
+            // heartThree.remove();
             heart--;
           } else if (heart === 2) {
             for (let i = 0; i < 60 * 2; i++) {
               particles.push(
                 new Particle(
-                  heartTwo.x + heartTwo.width,
-                  heartTwo.y + heartTwo.height / 2,
+                  heart2.x + heart2.width / 2,
+                  heart2.height / 2,
                   Math.random() * 2,
                   "red",
                   {
-                    x: (Math.random() - 0.5) * 3,
-                    y: (Math.random() - 0.5) * 3,
+                    x: (Math.random() - 0.5) * 7,
+                    y: (Math.random() - 0.5) * 7,
                   }
                 )
               );
             }
+            HeartsArray.splice(1, 1);
 
-            heartTwo.remove();
+            // heartTwo.remove();
             heart--;
           } else if (heart === 1) {
             for (let i = 0; i < 60 * 2; i++) {
               particles.push(
                 new Particle(
-                  heartOne.x + heartOne.width,
-                  heartOne.y + heartOne.height / 2,
+                  heart1.x + heart1.width / 2,
+                  heart1.y + heart1.height / 2,
                   Math.random() * 2,
                   "red",
                   {
-                    x: (Math.random() - 0.5) * 3,
-                    y: (Math.random() - 0.5) * 3,
+                    x: (Math.random() - 0.5) * 7,
+                    y: (Math.random() - 0.5) * 7,
                   }
                 )
               );
             }
-            heartOne.remove();
+            HeartsArray.splice(0, 1);
+
+            // heartOne.remove();
             heart--;
           }
         } else if (heart === 0) {
@@ -678,7 +732,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             new Particle(
               test.x + bonus.width,
               test.y + bonus.height / 2,
-              Math.random() * 2,
+              Math.random() * 3,
               "white",
               {
                 x: (Math.random() - 0.5) * 50,
@@ -701,6 +755,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
   enemyLoop();
   BonusesLoop();
   animate();
+
+  // Heart1.onload = function () {
+  // };
 });
 
 // Call Jump Animation
@@ -708,7 +765,7 @@ addEventListener("keyup", (event) => {
   if (event.code === "Space") {
     if (!test.hasJumped) {
       // sound of jump
-      jumpSound.play();
+      // jumpSound.play();
       // player.jumpCounter = 0;
       // player.hasJumped = true;
       jumpSound.play();
