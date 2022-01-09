@@ -5,53 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./main.css" />
-    <title>Document</title>
+    <title>Foxy</title>
   </head>
   <body>
-    <div id="scoremenu"><span>Score: </span><span class="score">0</span></div>
-    <div id="popup">
-      <div>
-        <h3>Your Final Score is:</h3>
-        <p id="final-result">0</p>
-        <h3>Points</h3>
-        <button type="button" class="restartBtn">Restart</button>
-        <button type="button" class="openGuide">Guide</button>
-      </div>
+    <div id="points-container">Points: <span id="points">10</span></div>
+    <div id="speed-container">
+      <p>Game Speed: <span id="showGameSpeed"></span></p>
+      <input
+        type="range"
+        min="1"
+        max="20"
+        value="5"
+        class="slider"
+        id="slider"
+      />
     </div>
-    <div id="waves">
-      <img class="wave" id="one" src="./images/wave.png" alt="" /><img id="two"
-        class="wave"
-        src="./images/wave.png"
+    <!-- <div id="heart-img">
+      <img
+        id="heartOne"
+        src="./character images/heart.png"
+        width="40px"
+        height="40px"
         alt=""
-      /><img class="wave" id="three" src="./images/wave.png" alt="" />
+      />
+      <img
+        id="heartTwo"
+        src="./character images/heart.png"
+        width="40px"
+        height="40px"
+        alt=""
+      />
+      <img
+        id="heartThree"
+        src="./character images/heart.png"
+        width="40px"
+        height="40px"
+        alt=""
+      />
+    </div> -->
+    <div class="contain-canvas">
+      <canvas> </canvas>
     </div>
-    <div id="guide">
-      <div>
-        <p>
-          <ul>
-            <li>Avoid the enemies!</li>
-            <li>Avoid the stars!</li>
-            <li>Hit Q to send a wave and clear the enemies and stars!</li>
-            <li>Hit the "space bar" to move faster!</li>
-            <li>You can not kill the stars, unless you use a wave!</li>
-            <li>Enemies spawn faster as the time goes by!</li>
+    <!-- <img src="./character images/animation.png" alt="" /> -->
+    <div class="div-center">
+      <div class="popupmenu">
+        <div class="center">
+          <p>Game Over</p>
+          <p>Result:</p>
+          <span id="last-result">0</span>
 
-
-        </p>
+          <button id="restart-button">Restart</button>
+        </div>
       </div>
-      <div id="controlers">
-     Controllers:
-        <img id="controlers-pic" src="./images/controlers.png" alt="" />
-      </div>
-      <button id="ok" type="button">Got it!</button>
     </div>
-    <canvas></canvas>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"
-      integrity="sha512-eP6ippJojIKXKO8EPLtsUMS+/sAGHGo1UN/38swqZa1ypfcD4I0V/ac5G3VzaHfDaklFmQLEs51lhkkVaqg60Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="./app.js"></script>
+    <script src="./main.js"></script>
   </body>
 </html>

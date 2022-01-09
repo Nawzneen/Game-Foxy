@@ -45,7 +45,7 @@ Heart3.src = "./character images/heart.png";
 // const playerImage = new Image();
 // playerImage.src = "./character images/STAND STILL.png";
 
-var jumpSound = new Audio("./sound/mixit-jump.flac");
+var jumpSound = new Audio("./sounds/mixit-jump.flac");
 var hitSound = new Audio("./sound/hitEnemy.flac");
 
 const slider = document.getElementById("slider");
@@ -334,22 +334,21 @@ class Enemy {
     this.enemyHeight = 200;
     this.height = 130;
     this.width = 130;
-    this.radius = this.width / 2;
+    this.radius = this.width / 2 - 40;
     this.frameX = 0;
     this.frameY = 0;
   }
   draw() {
-    // console.log(gameFrame);
     ctx.beginPath();
-    // ctx.strokeRect(this.x + 20, this.y, 60, this.height);
-    // ctx.arc(
-    //   this.x + this.radius,
-    //   this.y + this.radius,
+    // bellow to calculate the hitting point
+
+    // ctx.strokeRect(
+    //   this.x + this.radius / 2 + 40,
+    //   this.y,
     //   this.radius,
-    //   0,
-    //   Math.PI * 2,
-    //   true
+    //   this.height
     // );
+
     // ctx.fill();
     ctx.drawImage(
       this.image,
@@ -388,8 +387,8 @@ class Bonus {
     this.velocity = velocity;
     this.bonusWidth = 200;
     this.bonusHeight = 200;
-    this.height = 80;
-    this.width = 80;
+    this.height = 55;
+    this.width = 55;
     this.radius = this.width / 2;
     this.frame = 0;
   }
@@ -479,20 +478,20 @@ let particles = [];
 // Start of Creating random enemies
 function createEnemies() {
   let velocity = gameSpeed;
-  console.log(gameSpeed);
-  // let randomRadius = Math.random() * 30;
   enemies.push(new Enemy(canvas.width - 10, y + 10, velocity));
 }
 
 function enemyLoop() {
-  var t = 3000 + Math.random() * 10000;
-  if (animationFrame % 1800 == 0) {
-    t = t - 1000;
-    console.log("time is faster ");
-
-    console.log(t);
-  }
+  var t = Math.floor(Math.random() * (1000 + 9000 - 5000) + 5000);
   // console.log(t);
+  console.log(animationFrame);
+
+  if (animationFrame % 300 === 0) {
+    console.log(animationFrame);
+    t = t - 3000;
+    console.log("time is faster ");
+  }
+
   setTimeout(function () {
     createEnemies();
     enemyLoop();
@@ -613,7 +612,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         test.y + test.radius - enemy.y - enemy.radius
       );
 
-      if (dist1 - enemy.radius - test.radius + 35 < 0) {
+      if (dist1 - enemy.radius - test.radius + 45 < 0) {
         enemies.splice(index, 1);
         for (let i = 0; i < 60 * 2; i++) {
           hitSound.play();
