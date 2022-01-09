@@ -45,8 +45,8 @@ Heart3.src = "./character images/heart.png";
 // const playerImage = new Image();
 // playerImage.src = "./character images/STAND STILL.png";
 
-var jumpSound = new Audio("./sounds/mixit-jump.flac");
-var hitSound = new Audio("./sound/hitEnemy.flac");
+var jumpSound = new Audio("sound/mixit-jump.flac");
+var hitSound = new Audio("sound/hitEnemy.flac");
 
 const slider = document.getElementById("slider");
 slider.value = gameSpeed;
